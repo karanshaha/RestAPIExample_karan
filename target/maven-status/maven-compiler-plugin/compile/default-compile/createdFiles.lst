@@ -1,0 +1,5 @@
+com\karan\EmployeeDetailsMgmt\EmployeeDetailsMgmt\App.class
+com\employeeMgmt\empRestServiceImpl\EmployeeServiceImpl.class
+com\employeeMgmt\empRestService\EmployeeService.class
+com\employeeMgmt\dao\EmployeeDAO.class
+com\employeeMgmt\Model\Employee.class
