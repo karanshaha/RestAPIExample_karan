@@ -1,7 +1,5 @@
 package com.employeeMgmt.dao;
 
-import org.springframework.stereotype.Service;
-
 import com.employeeMgmt.Model.Employee;
 
 
