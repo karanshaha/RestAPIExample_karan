@@ -12,7 +12,7 @@ public class EmployeeDAO {
 		emp.setEmail("test@example.com");
 		emp.setEmployeeId("675436");
 		emp.setFirstName("John");
-		emp.setLastName("Smith");
+		emp.setLastName("Smith123");
 		return emp;
 	}
 }
