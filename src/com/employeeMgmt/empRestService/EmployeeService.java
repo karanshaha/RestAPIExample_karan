@@ -1,23 +1,24 @@
 package com.employeeMgmt.empRestService;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import java.io.Serializable;
+
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 
-import org.springframework.stereotype.Component;
+import com.employeeMgmt.Exception.EmployeMgmtAppException;
+import com.employeeMgmt.Model.Employee;
 
 
-@Path("/empServices/")
-public interface EmployeeService {
+public interface EmployeeService extends Serializable{
 
+	public void addEmployee(Employee employee,@Context HttpHeaders httpHeaders) throws EmployeMgmtAppException;
 	
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{id}/")
-	@GET
-	public Response getEmployeeDetails(@PathParam("id") Long id);
+	public Response getEmployeeDetails(@PathParam("id") Integer id, @Context HttpHeaders httpHeaders) throws EmployeMgmtAppException;
+	
+	public Response updateEmployeeDetails(@PathParam("department") String department,@PathParam("id") Integer id,@Context HttpHeaders httpHeaders) throws EmployeMgmtAppException ;
+	
+	public void deleteEmployeeDetails(@PathParam("id") Integer id,@Context HttpHeaders httpHeaders) throws EmployeMgmtAppException ;
+
 }

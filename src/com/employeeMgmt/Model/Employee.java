@@ -1,16 +1,39 @@
 package com.employeeMgmt.Model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @SuppressWarnings("restriction")
 @XmlRootElement(name="employee")
+@Entity
+@Table(name = "employee")
 public class Employee {
+	
+	@Column(name="firstName")
 	private String firstName;
+	
+	@Column(name="lastName")
 	private String lastName;
-	private String employeeId;
+	
+	@Column(name="employeeId")
+	@Id
+	//@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer employeeId;
+	
+	@Column(name="email")
 	private String email;
+	
+	@Column(name="dateOfJoining")
 	private String dateOfJoining;
+	
+	@Column(name="department")
 	private String department;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -23,10 +46,10 @@ public class Employee {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getEmployeeId() {
+	public Integer getEmployeeId() {
 		return employeeId;
 	}
-	public void setEmployeeId(String employeeId) {
+	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
 	}
 	public String getEmail() {

@@ -8,10 +8,10 @@
 		xsi:schemaLocation="
 			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
 			http://www.springframework.org/schema/beans 
-			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 			http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
 			http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
-			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
 	<import resource="classpath:META-INF/cxf/cxf.xml"/>
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
@@ -29,15 +29,43 @@
 	<!-- <bean id="jsonProvider" 
 		class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/> -->
 	
-  	<jaxrs:server id="empService" address="/">
+  	 <jaxrs:server id="empService1" address="/">
    		<jaxrs:serviceBeans>
 			<ref bean="empRestServiceImpl" />
 		</jaxrs:serviceBeans>
   		<jaxrs:providers>
 			<ref bean='jacksonProvider' />
-			<!-- <bean class="org.codehaus.jackson.jaxrs.JsonMappingExceptionMapper" /> -->
+			<bean class="org.codehaus.jackson.jaxrs.JsonMappingExceptionMapper" />
+			 <ref bean="authenticationHandlerRequest"/>
+			 <ref bean="authenticationHandlerResponse"/> 
 		</jaxrs:providers>
-  	</jaxrs:server>
+  	</jaxrs:server> 
+  	
+   	<jaxrs:server id="stripService" address="/strip/">
+   		<jaxrs:serviceBeans>
+			<ref bean="StripeExampleService" />
+			
+		</jaxrs:serviceBeans>
+  		<jaxrs:providers>
+			<ref bean='jacksonProvider' />
+			<bean class="org.codehaus.jackson.jaxrs.JsonMappingExceptionMapper" />
+			 <ref bean="authenticationHandlerRequest"/>
+			 <ref bean="authenticationHandlerResponse"/> 
+		</jaxrs:providers>
+  	</jaxrs:server> 
+  	
+  	
+  	<jaxrs:server id="authenticationService" address="/auth/">
+   		<jaxrs:serviceBeans>
+			<ref bean="UserValidatorServiceImpl" />
+		</jaxrs:serviceBeans>
+  		<jaxrs:providers>
+			<ref bean='jacksonProvider' />
+			<bean class="org.codehaus.jackson.jaxrs.JsonMappingExceptionMapper" />
+			 <!-- <ref bean="authenticationHandlerRequest"/> -->
+			<!--  <ref bean="authenticationHandlerResponse"/> -->
+		</jaxrs:providers>
+  	</jaxrs:server> 
   	
   	
   	<bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper">
@@ -51,8 +79,9 @@
 	</bean>
   	
   	<bean id="empRestServiceImpl" class="com.employeeMgmt.empRestServiceImpl.EmployeeServiceImpl"/>
+  	<bean id="StripeExampleService" class="com.employeeMgmt.empRestServiceImpl.StripeServiceImpl"/>
+  	<bean id="UserValidatorServiceImpl" class="com.employeeMgmt.AuthenticationModule.UserValidatorServiceImpl"/>
     <bean id="employeeDao" class="com.employeeMgmt.dao.EmployeeDAO"/> 
-  	
-  	    
-
+    <bean id="authenticationHandlerRequest" class="com.employeeMgmt.AuthenticationModule.DemoRESTRequestFilter"/>
+  	<bean id="authenticationHandlerResponse" class="com.employeeMgmt.AuthenticationModule.DemoRESTResponseFilter"/>
 </beans>
