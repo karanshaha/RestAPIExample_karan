@@ -25,7 +25,7 @@
         </cxf:features>
     </cxf:bus>
     
-<!-- 	<bean id="accountService" class="server.service.AccountService" init-method="init"></bean> -->
+ <!-- 	<bean id="accountService" class="server.service.AccountService" init-method="init"></bean> -->
 	<!-- <bean id="jsonProvider" 
 		class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/> -->
 	

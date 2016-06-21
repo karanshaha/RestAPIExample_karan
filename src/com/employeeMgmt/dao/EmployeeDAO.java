@@ -3,11 +3,13 @@ package com.employeeMgmt.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.employeeMgmt.Model.Employee;
 
-@Transactional
+@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_UNCOMMITTED,timeout=100)
 public class EmployeeDAO {
 
 	@Autowired
